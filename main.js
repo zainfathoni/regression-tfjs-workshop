@@ -2,6 +2,9 @@
 // This will store mouse x,y points that have been scaled from 0->1
 let Xs = [];
 let Ys = [];
+let A = 1;
+let C = 100;
+const getY = x => A * x + C
 
 // This scales a value from 0 to max to 0 to 1
 const norm = (x, max) => map(x, 0, max, 0, 1);
@@ -30,8 +33,15 @@ function mouseClicked() {
   Xs.push(x);
   Ys.push(y);
   console.log(Xs, Ys);
-  // 3
-  // We can print an elipse for each mouse click
   ellipse(mouseX, mouseY, 10);
-  text(`[${x}, ${y}]`, mouseX + 10, mouseY + 4);
+}
+
+function draw() {
+  const x1 = 0; // Start on the furthest left
+  const y1 = getY(x1); // Get the y value for this
+  const x2 = windowWidth; // End on the furthest right
+  const y2 = getY(x2); // Get the y value for this
+  stroke(51);
+  strokeWeight(10);
+  line(x1, y1, x2, y2);
 }
